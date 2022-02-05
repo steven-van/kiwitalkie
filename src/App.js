@@ -1,25 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+import Header from "components/Header";
+import styled from "styled-components";
+import InputChat from "components/InputChat";
+import MessageList from "components/MessageList";
 
-function App() {
+const Page = styled.div`
+  display: flex;
+  flex-direction: column;
+  max-width: 1920px;
+  height: 100vh;
+  margin: auto;
+`;
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Page>
+      <Header />
+      <MessageList />
+      <InputChat />
+    </Page>
   );
-}
+};
 
 export default App;
