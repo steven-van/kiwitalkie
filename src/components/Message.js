@@ -17,8 +17,21 @@ const MessageContainer = styled.div`
   }
 `;
 
-const Message = ({ children, fromMe }) => {
-  return <MessageContainer fromMe={fromMe}>{children}</MessageContainer>;
+const Message = ({ children, fromMe, timestamp }) => {
+  return (
+    <>
+      <MessageContainer fromMe={fromMe}>{children}</MessageContainer>
+      <span
+        style={{
+          color: "#373e53",
+          marginTop: "2px",
+          alignSelf: fromMe ? "flex-end" : "flex-start",
+        }}
+      >
+        {timestamp}
+      </span>
+    </>
+  );
 };
 
 export default Message;

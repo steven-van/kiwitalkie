@@ -15,7 +15,11 @@ const MessageList = ({ messages }) => {
   const renderChat = () => {
     const renderedMessages = messages.map((message, index) => {
       return (
-        <Message key={index} fromMe={message.fromMe}>
+        <Message
+          key={index}
+          fromMe={message.fromMe}
+          timestamp={message.timestamp}
+        >
           {message.text}
         </Message>
       );
@@ -23,19 +27,7 @@ const MessageList = ({ messages }) => {
     return renderedMessages;
   };
 
-  return (
-    <MessageListContainer>
-      <Message fromMe={true}>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua.
-      </Message>
-      <Message>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua.
-      </Message>
-      {renderChat()}
-    </MessageListContainer>
-  );
+  return <MessageListContainer>{renderChat()}</MessageListContainer>;
 };
 
 export default MessageList;

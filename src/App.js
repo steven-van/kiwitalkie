@@ -17,7 +17,10 @@ const Page = styled.div`
 const socket = io.connect("http://localhost:1337");
 
 const App = () => {
-  const [message, setMessage] = useState({ text: "", fromMe: null });
+  const [message, setMessage] = useState({
+    text: "",
+    fromMe: null,
+  });
   const [messageList, setMessageList] = useState([]);
 
   const handleInputChange = (msg) => {
@@ -35,7 +38,11 @@ const App = () => {
     socket.on("message", (msg, socketId) => {
       setMessageList([
         ...messageList,
-        { text: msg.text, fromMe: socket.id === socketId },
+        {
+          text: msg.text,
+          timestamp: msg.timestamp,
+          fromMe: socket.id === socketId,
+        },
       ]);
     });
   });
