@@ -12,6 +12,13 @@ const io = new Server(httpServer, {
 
 io.on("connection", (socket) => {
   socket.on("message", (message) => {
+    date = new Date();
+    time =
+      date.getHours().toString().padStart(2, "0") +
+      ":" +
+      date.getMinutes().toString().padStart(2, "0");
+    message.timestamp = time;
+
     io.emit("message", message, socket.id);
   });
 });
