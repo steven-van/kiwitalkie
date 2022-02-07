@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components";
-import KiwiTalkieLogo from "./KiwiTalkieLogo";
+import KiwiTalkieLogo from "components/KiwiTalkieLogo";
 
-const Container = styled.div`
+const HeaderContainer = styled.div`
   height: 70px;
-  background-color: #d3eca7;
+  background-color: #1d2437;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -16,11 +16,11 @@ const LogoContainer = styled.div`
 
 const Header = () => {
   return (
-    <Container>
+    <HeaderContainer>
       <LogoContainer>
         <KiwiTalkieLogo />
       </LogoContainer>
-    </Container>
+    </HeaderContainer>
   );
 };
 

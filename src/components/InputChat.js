@@ -5,7 +5,7 @@ import styled from "styled-components";
 const InputContainer = styled.div`
   height: 100px;
   display: flex;
-  background-color: #f7f7cf;
+  background-color: #222a3f;
   justify-content: center;
   align-items: center;
 `;
@@ -16,8 +16,13 @@ const Input = styled.input`
   margin-right: 10px;
   outline: none;
   border: 0;
+  color: white;
+  background-color: #1d2437;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   border-radius: 10px;
+  ::placeholder {
+    color: #373e53;
+  }
 `;
 
 const SubmitButton = styled.button`
@@ -26,17 +31,27 @@ const SubmitButton = styled.button`
   border: none;
   border-radius: 10px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  background-color: #a3da8d;
+  background-color: #32de84;
+
   &:hover {
     cursor: pointer;
   }
 `;
 
-const InputChat = () => {
+const InputChat = ({ message, handleInputChange, handleMessageSubmit }) => {
   return (
     <InputContainer>
-      <Input placeholder="Type your message..." />
-      <SubmitButton>
+      <Input
+        placeholder="Type your message..."
+        value={message.text}
+        onKeyPress={(e) => {
+          if (e.key === "Enter") {
+            handleMessageSubmit();
+          }
+        }}
+        onChange={(e) => handleInputChange(e.target.value)}
+      />
+      <SubmitButton onClick={() => handleMessageSubmit()}>
         <img src={sendArrow} style={{ width: "70%" }} alt="Send Arrow"></img>
       </SubmitButton>
     </InputContainer>
