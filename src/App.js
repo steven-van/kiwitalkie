@@ -19,18 +19,17 @@ const socket = io.connect("http://localhost:1337");
 const App = () => {
   const [message, setMessage] = useState({
     text: "",
-    fromMe: null,
   });
   const [messageList, setMessageList] = useState([]);
 
   const handleInputChange = (msg) => {
-    setMessage({ text: msg, fromMe: true });
+    setMessage({ text: msg });
   };
 
   const handleMessageSubmit = () => {
     if (message.text.trim() !== "") {
       socket.emit("message", message);
-      setMessage({ text: "", fromMe: null });
+      setMessage({ text: "" });
     }
   };
 
