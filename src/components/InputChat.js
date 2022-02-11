@@ -38,7 +38,7 @@ const SubmitButton = styled.button`
   }
 `;
 
-const InputChat = ({ message, handleInputChange, handleMessageSubmit }) => {
+const InputChat = ({ message, handleMsgInputChange, handleMessageSubmit }) => {
   return (
     <InputContainer>
       <Input
@@ -49,7 +49,7 @@ const InputChat = ({ message, handleInputChange, handleMessageSubmit }) => {
             handleMessageSubmit();
           }
         }}
-        onChange={(e) => handleInputChange(e.target.value)}
+        onChange={(e) => handleMsgInputChange(e.target.value)}
       />
       <SubmitButton onClick={() => handleMessageSubmit()}>
         <img src={sendArrow} style={{ width: "70%" }} alt="Send Arrow"></img>
