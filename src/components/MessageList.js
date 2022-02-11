@@ -12,6 +12,14 @@ const MessageListContainer = styled.div`
   overflow-y: auto;
 `;
 
+const RoomContainer = styled.div`
+  position: absolute;
+  left: 50%;
+  top: 0;
+  color: #373e53;
+  font-weight: bold;
+`;
+
 const MessageList = ({ messages, room }) => {
   const renderChat = () => {
     const renderedMessages = messages.map((message, index) => {
@@ -30,21 +38,7 @@ const MessageList = ({ messages, room }) => {
 
   return (
     <MessageListContainer>
-      {room && (
-        <div
-          style={{
-            position: "absolute",
-            left: "50%",
-            top: "0",
-            marginTop: "5px",
-            color: "#373e53",
-            fontWeight: "bold",
-          }}
-        >
-          Room #{room}
-        </div>
-      )}
-
+      {room && <RoomContainer>{`Room #${room}`}</RoomContainer>}
       {renderChat()}
     </MessageListContainer>
   );
