@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 const Input = styled.input`
@@ -31,18 +31,19 @@ const JoinRoomButton = styled.button`
   }
 `;
 
-const InputRoom = ({ handleRoomInputChange, handleJoinRoom }) => {
+const InputRoom = ({ handleJoinRoom }) => {
+  const [input, setInput] = useState("");
   return (
     <>
       <Input
         onKeyPress={(e) => {
           if (e.key === "Enter") {
-            handleJoinRoom();
+            handleJoinRoom(input);
           }
         }}
-        onChange={(e) => handleRoomInputChange(e.target.value)}
+        onChange={(e) => setInput(e.target.value)}
       />
-      <JoinRoomButton onClick={() => handleJoinRoom()}>
+      <JoinRoomButton onClick={() => handleJoinRoom(input)}>
         Join Room
       </JoinRoomButton>
     </>

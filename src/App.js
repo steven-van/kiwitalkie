@@ -38,23 +38,13 @@ const Sidebar = styled.div`
 const socket = io.connect("http://localhost:1337");
 
 const App = () => {
-  const [message, setMessage] = useState({
-    text: "",
-  });
   const [messageList, setMessageList] = useState([]);
   const [room, setRoom] = useState("");
 
-  const handleMsgInputChange = (msg) => {
-    setMessage({ text: msg });
-  };
-
-  const handleRoomInputChange = (r) => {
+  const handleJoinRoom = (r) => {
     setRoom(r);
-  };
-
-  const handleJoinRoom = () => {
-    socket.emit("join-room", room);
-    toast.info(`Joined room ${room}`, {
+    socket.emit("join-room", r);
+    toast.info(`Joined room #${r}`, {
       theme: "colored",
       position: "bottom-right",
       autoClose: 5000,
@@ -66,18 +56,17 @@ const App = () => {
     });
   };
 
-  const handleMessageSubmit = () => {
-    if (message.text.trim() !== "") {
-      socket.emit("send-message", message, room);
+  const handleMessageSubmit = (msg) => {
+    if (msg.text.trim() !== "") {
+      socket.emit("send-message", msg, room);
       setMessageList([
         ...messageList,
         {
-          text: message.text,
-          timestamp: message.timestamp,
+          text: msg.text,
+          timestamp: msg.timestamp,
           fromMe: true,
         },
       ]);
-      setMessage({ text: "" });
     }
   };
 
@@ -97,19 +86,12 @@ const App = () => {
   return (
     <Page>
       <Sidebar>
-        <InputRoom
-          handleJoinRoom={handleJoinRoom}
-          handleRoomInputChange={handleRoomInputChange}
-        />
+        <InputRoom handleJoinRoom={handleJoinRoom} />
       </Sidebar>
       <ChatSection>
         <Header />
-        <MessageList messages={messageList} />
-        <InputChat
-          message={message}
-          handleMsgInputChange={handleMsgInputChange}
-          handleMessageSubmit={handleMessageSubmit}
-        />
+        <MessageList room={room} messages={messageList} />
+        <InputChat handleMessageSubmit={handleMessageSubmit} />
       </ChatSection>
       <ToastContainer
         position="bottom-right"

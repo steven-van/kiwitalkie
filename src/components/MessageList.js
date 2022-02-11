@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Message from "components/Message";
 
 const MessageListContainer = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   background-color: #222a3f;
@@ -11,7 +12,7 @@ const MessageListContainer = styled.div`
   overflow-y: auto;
 `;
 
-const MessageList = ({ messages }) => {
+const MessageList = ({ messages, room }) => {
   const renderChat = () => {
     const renderedMessages = messages.map((message, index) => {
       return (
@@ -27,7 +28,26 @@ const MessageList = ({ messages }) => {
     return renderedMessages;
   };
 
-  return <MessageListContainer>{renderChat()}</MessageListContainer>;
+  return (
+    <MessageListContainer>
+      {room && (
+        <div
+          style={{
+            position: "absolute",
+            left: "50%",
+            top: "0",
+            marginTop: "5px",
+            color: "#373e53",
+            fontWeight: "bold",
+          }}
+        >
+          Room #{room}
+        </div>
+      )}
+
+      {renderChat()}
+    </MessageListContainer>
+  );
 };
 
 export default MessageList;

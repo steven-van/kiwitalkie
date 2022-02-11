@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import sendArrow from "assets/send-arrow.svg";
 import styled from "styled-components";
 
@@ -38,20 +38,27 @@ const SubmitButton = styled.button`
   }
 `;
 
-const InputChat = ({ message, handleMsgInputChange, handleMessageSubmit }) => {
+const InputChat = ({ handleMessageSubmit }) => {
+  const [input, setInput] = useState({ text: "" });
   return (
     <InputContainer>
       <Input
         placeholder="Type your message..."
-        value={message.text}
+        value={input.text}
         onKeyPress={(e) => {
           if (e.key === "Enter") {
-            handleMessageSubmit();
+            handleMessageSubmit({ text: input });
+            setInput({ text: "" });
           }
         }}
-        onChange={(e) => handleMsgInputChange(e.target.value)}
+        onChange={(e) => setInput(e.target.value)}
       />
-      <SubmitButton onClick={() => handleMessageSubmit()}>
+      <SubmitButton
+        onClick={() => {
+          handleMessageSubmit({ text: input });
+          setInput({ text: "" });
+        }}
+      >
         <img src={sendArrow} style={{ width: "70%" }} alt="Send Arrow"></img>
       </SubmitButton>
     </InputContainer>
