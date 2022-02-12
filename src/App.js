@@ -41,19 +41,21 @@ const App = () => {
   const [messageList, setMessageList] = useState([]);
   const [room, setRoom] = useState("");
 
-  const handleJoinRoom = (r) => {
-    setRoom(r);
-    socket.emit("join-room", r);
-    toast.info(`Joined room #${r}`, {
-      theme: "colored",
-      position: "bottom-right",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-    });
+  const handleJoinRoom = (newRoom) => {
+    if (newRoom !== room) {
+      socket.emit("join-room", newRoom, room);
+      toast.info(`Joined room #${newRoom}`, {
+        theme: "colored",
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      setRoom(newRoom);
+    }
   };
 
   const handleMessageSubmit = (msg) => {

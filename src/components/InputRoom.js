@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
+const InputContainer = styled.div`
+  display: flex;
+`;
 const Input = styled.input`
-  width: 30%;
+  width: 50%;
   height: 10px;
   margin-right: 10px;
   padding: 20px;
@@ -18,7 +21,7 @@ const Input = styled.input`
 `;
 
 const JoinRoomButton = styled.button`
-  width: 30%;
+  width: 50%;
   height: 50px;
   border: none;
   border-radius: 10px;
@@ -34,8 +37,10 @@ const JoinRoomButton = styled.button`
 const InputRoom = ({ handleJoinRoom }) => {
   const [input, setInput] = useState("");
   return (
-    <>
+    <InputContainer>
       <Input
+        type="number"
+        min="1"
         onKeyPress={(e) => {
           if (e.key === "Enter") {
             handleJoinRoom(input);
@@ -46,7 +51,7 @@ const InputRoom = ({ handleJoinRoom }) => {
       <JoinRoomButton onClick={() => handleJoinRoom(input)}>
         Join Room
       </JoinRoomButton>
-    </>
+    </InputContainer>
   );
 };
 

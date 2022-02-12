@@ -4,6 +4,7 @@ import styled from "styled-components";
 
 const InputContainer = styled.div`
   height: 100px;
+  padding: 0 10px;
   display: flex;
   background-color: #222a3f;
   justify-content: center;
