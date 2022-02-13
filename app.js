@@ -24,10 +24,12 @@ io.on("connection", (socket) => {
       socket.to(room).emit("receive-message", message);
     }
   });
-
-  socket.on("join-room", (room) => {
-    socket.join(room);
-    console.log(`Joined room ${room}`);
+  socket.on("join-room", (newRoom, previousRoom) => {
+    if (previousRoom !== "") {
+      socket.leave(previousRoom);
+    }
+    socket.join(newRoom);
+    console.log(`Joined room ${newRoom}`);
   });
 });
 
