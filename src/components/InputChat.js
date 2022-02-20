@@ -46,7 +46,7 @@ const InputChat = ({ handleMessageSubmit }) => {
       <Input
         placeholder="Type your message..."
         value={input.text}
-        onKeyPress={(e) => {
+        onKeyDown={(e) => {
           if (e.key === "Enter") {
             handleMessageSubmit({ text: input });
             setInput({ text: "" });

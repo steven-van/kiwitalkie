@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Header from "components/Header";
 import styled from "styled-components";
 import InputChat from "components/InputChat";
@@ -6,6 +6,7 @@ import { ToastContainer, toast } from "react-toastify";
 import MessageList from "components/MessageList";
 import InputRoom from "components/InputRoom";
 import "react-toastify/dist/ReactToastify.css";
+import UserContext from "contexts/UserContext";
 
 const Page = styled.div`
   display: flex;
@@ -25,15 +26,23 @@ const Sidebar = styled.div`
   padding: 10px;
   width: 20%;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: space-between;
   background-color: #1d2437;
   @media (max-width: 768px) {
     width: 30%;
   }
 `;
 
+const Text = styled.p`
+  color: white;
+  text-align: center;
+  font-weight: 500;
+`;
+
 const Chatroom = ({ socket }) => {
   const [messageList, setMessageList] = useState([]);
+  const { username } = useContext(UserContext);
   const [room, setRoom] = useState("");
 
   const handleJoinRoom = (newRoom) => {
@@ -88,6 +97,7 @@ const Chatroom = ({ socket }) => {
     <Page>
       <Sidebar>
         <InputRoom handleJoinRoom={handleJoinRoom} />
+        <Text>Hello {username}</Text>
       </Sidebar>
       <ChatSection>
         <Header />

@@ -15,7 +15,7 @@ const MessageListContainer = styled.div`
 const RoomContainer = styled.div`
   position: absolute;
   left: 50%;
-  top: 0;
+  top: 10px;
   color: #373e53;
   font-weight: bold;
 `;

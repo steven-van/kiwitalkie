@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import KiwiTalkieLogo from "components/KiwiTalkieLogo";
 import door from "assets/door.svg";
 import { useNavigate } from "react-router-dom";
+import UserContext from "contexts/UserContext";
 
 const Page = styled.div`
   display: flex;
@@ -63,7 +64,7 @@ const SubmitButton = styled.button`
 `;
 
 const Login = ({ socket }) => {
-  const [username, setUsername] = useState("");
+  const {username, setUsername} = useContext(UserContext)
   const navigate = useNavigate();
 
   const handleSubmit = (user) => {
