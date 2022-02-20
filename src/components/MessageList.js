@@ -26,7 +26,7 @@ const MessageList = ({ messages, room }) => {
       return (
         <Message
           key={index}
-          fromMe={message.fromMe}
+          username={message.username}
           timestamp={message.timestamp}
         >
           {message.text}

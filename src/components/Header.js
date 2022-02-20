@@ -11,7 +11,7 @@ const HeaderContainer = styled.div`
 `;
 
 const LogoContainer = styled.div`
-  height: 50px;
+  height: 35px;
 `;
 
 const Header = () => {

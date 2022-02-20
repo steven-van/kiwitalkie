@@ -7,15 +7,12 @@ import MessageList from "components/MessageList";
 import InputRoom from "components/InputRoom";
 import "react-toastify/dist/ReactToastify.css";
 
-import io from "socket.io-client";
-
 const Page = styled.div`
   display: flex;
   flex-direction: row;
   margin: auto;
   max-width: 1920px;
   height: 100vh;
-  background-color: #4b4f59;
 `;
 
 const ChatSection = styled.div`
@@ -35,9 +32,7 @@ const Sidebar = styled.div`
   }
 `;
 
-const socket = io.connect("http://localhost:1337");
-
-const Chatroom = () => {
+const Chatroom = ({ socket }) => {
   const [messageList, setMessageList] = useState([]);
   const [room, setRoom] = useState("");
 
@@ -71,7 +66,6 @@ const Chatroom = () => {
         {
           text: msg.text,
           timestamp: time,
-          fromMe: true,
         },
       ]);
     }
@@ -84,7 +78,7 @@ const Chatroom = () => {
         {
           text: msg.text,
           timestamp: msg.timestamp,
-          fromMe: false,
+          username: msg.username,
         },
       ]);
     });

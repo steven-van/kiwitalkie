@@ -25,11 +25,11 @@ const Span = styled.span`
   align-self: ${(props) => props.align || "flex-start"};
 `;
 
-const Message = ({ children, fromMe, timestamp }) => {
+const Message = ({ children, username, timestamp }) => {
   return (
-    <Container fromMe={fromMe}>
-      {!fromMe && <Span>Hello</Span>}
-      <MessageContainer fromMe={fromMe}>{children}</MessageContainer>
+    <Container fromMe={!username}>
+      {username && <Span>{username}</Span>}
+      <MessageContainer fromMe={!username}>{children}</MessageContainer>
       <Span align={"flex-end"}>{timestamp}</Span>
     </Container>
   );
