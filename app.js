@@ -10,14 +10,20 @@ const io = new Server(httpServer, {
   },
 });
 
+var username = {};
+
 io.on("connection", (socket) => {
+  socket.on("add-user", (user) => {
+    username[socket.id] = user;
+  });
   socket.on("send-message", (message, room) => {
-    date = new Date();
-    time =
+    const date = new Date();
+    const time =
       date.getHours().toString().padStart(2, "0") +
       ":" +
       date.getMinutes().toString().padStart(2, "0");
     message.timestamp = time;
+    message.username = username[socket.id];
     if (room === "") {
       socket.broadcast.emit("receive-message", message);
     } else {
