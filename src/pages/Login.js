@@ -64,7 +64,7 @@ const SubmitButton = styled.button`
 `;
 
 const Login = ({ socket }) => {
-  const {username, setUsername} = useContext(UserContext)
+  const { username, setUsername } = useContext(UserContext);
   const navigate = useNavigate();
 
   const handleSubmit = (user) => {
@@ -83,7 +83,7 @@ const Login = ({ socket }) => {
         <Text>Welcome to KiwiTalkie your instant messaging app</Text>
         <Input
           placeholder="Enter your username..."
-          onKeyPress={(e) => {
+          onKeyDown={(e) => {
             if (e.key === "Enter") {
               handleSubmit(username);
             }

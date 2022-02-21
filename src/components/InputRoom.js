@@ -41,7 +41,7 @@ const InputRoom = ({ handleJoinRoom }) => {
       <Input
         type="number"
         min="1"
-        onKeyPress={(e) => {
+        onKeyDown={(e) => {
           if (e.key === "Enter") {
             handleJoinRoom(input);
           }
