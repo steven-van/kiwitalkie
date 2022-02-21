@@ -34,8 +34,8 @@ const Sidebar = styled.div`
   }
 `;
 
-const Text = styled.p`
-  color: white;
+const UsernameContainer = styled.p`
+  color: #373e53;
   text-align: center;
   font-weight: 500;
 `;
@@ -97,7 +97,7 @@ const Chatroom = ({ socket }) => {
     <Page>
       <Sidebar>
         <InputRoom handleJoinRoom={handleJoinRoom} />
-        <Text>Hello {username}</Text>
+        <UsernameContainer>Hello {username}</UsernameContainer>
       </Sidebar>
       <ChatSection>
         <Header />
