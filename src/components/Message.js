@@ -4,11 +4,11 @@ import styled from "styled-components";
 const Container = styled.div`
   align-self: ${(props) => (props.fromMe ? "flex-end" : "flex-start")};
   max-width: 40%;
-  display: flex;
-  flex-direction: column;
 `;
+
 const MessageContainer = styled.div`
   padding: 12px;
+  display: inline-block;
   overflow-wrap: break-word;
   font-weight: 500;
   color: white;
@@ -20,17 +20,17 @@ const MessageContainer = styled.div`
     max-width: 60%;
   }
 `;
-const Span = styled.span`
+const MessageInfo = styled.div`
   color: #373e53;
-  align-self: ${(props) => props.align || "flex-start"};
+  text-align: ${(props) => props.align || "start"};
 `;
 
 const Message = ({ children, username, timestamp }) => {
   return (
     <Container fromMe={!username}>
-      {username && <Span>{username}</Span>}
+      {username && <MessageInfo>{username}</MessageInfo>}
       <MessageContainer fromMe={!username}>{children}</MessageContainer>
-      <Span align={"flex-end"}>{timestamp}</Span>
+      <MessageInfo align={"end"}>{timestamp}</MessageInfo>
     </Container>
   );
 };
