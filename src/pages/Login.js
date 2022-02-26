@@ -84,14 +84,14 @@ const Login = ({ socket }) => {
           maxLength={20}
           placeholder="Enter your username..."
           onKeyDown={(e) => {
+            if (e.key === " ") {
+              e.preventDefault();
+            }
             if (e.key === "Enter") {
               handleSubmit(username);
             }
           }}
           onChange={(e) => {
-            if (e.currentTarget.value.includes(" ")) {
-              e.currentTarget.value = e.currentTarget.value.replace(/\s/g, "");
-            }
             setUsername(e.target.value);
           }}
         />

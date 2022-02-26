@@ -41,15 +41,15 @@ const InputRoom = ({ handleJoinRoom }) => {
       <Input
         maxLength={3}
         onKeyDown={(e) => {
+          if (!(e.key.match(/^[0-9\b]+$/) || e.key === "Backspace")) {
+            e.preventDefault();
+          }
           if (e.key === "Enter") {
             handleJoinRoom(input);
           }
         }}
         onChange={(e) => {
-          const re = /^[0-9\b]+$/;
-          if (re.test(e.target.value) || e.target.value === "") {
-            setInput(e.target.value);
-          }
+          setInput(e.target.value);
         }}
       />
       <JoinRoomButton onClick={() => handleJoinRoom(input)}>
