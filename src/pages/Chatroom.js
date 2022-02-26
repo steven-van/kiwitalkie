@@ -58,6 +58,7 @@ const Chatroom = ({ socket }) => {
         draggable: true,
         progress: undefined,
       });
+      setMessageList([]);
       setRoom(newRoom);
     }
   };
