@@ -47,7 +47,7 @@ const InputRoom = ({ handleJoinRoom }) => {
         }}
         onChange={(e) => {
           const re = /^[0-9\b]+$/;
-          if (re.tet(e.target.value) || e.target.value === "") {
+          if (re.test(e.target.value) || e.target.value === "") {
             setInput(e.target.value);
           }
         }}
