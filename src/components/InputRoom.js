@@ -39,14 +39,18 @@ const InputRoom = ({ handleJoinRoom }) => {
   return (
     <InputContainer>
       <Input
-        type="number"
-        min="1"
+        maxLength={3}
         onKeyDown={(e) => {
           if (e.key === "Enter") {
             handleJoinRoom(input);
           }
         }}
-        onChange={(e) => setInput(e.target.value)}
+        onChange={(e) => {
+          const re = /^[0-9\b]+$/;
+          if (re.tet(e.target.value) || e.target.value === "") {
+            setInput(e.target.value);
+          }
+        }}
       />
       <JoinRoomButton onClick={() => handleJoinRoom(input)}>
         Join Room

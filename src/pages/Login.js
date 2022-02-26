@@ -11,7 +11,6 @@ const Page = styled.div`
   align-items: center;
   max-width: 1920px;
   height: 100vh;
-  padding: 20px;
   background-color: #222a3f;
 `;
 
@@ -82,13 +81,19 @@ const Login = ({ socket }) => {
         </LogoContainer>
         <Text>Welcome to KiwiTalkie your instant messaging app</Text>
         <Input
+          maxLength={20}
           placeholder="Enter your username..."
           onKeyDown={(e) => {
             if (e.key === "Enter") {
               handleSubmit(username);
             }
           }}
-          onChange={(e) => setUsername(e.target.value)}
+          onChange={(e) => {
+            if (e.currentTarget.value.includes(" ")) {
+              e.currentTarget.value = e.currentTarget.value.replace(/\s/g, "");
+            }
+            setUsername(e.target.value);
+          }}
         />
         <SubmitButton onClick={() => handleSubmit(username)}>
           <img src={door} style={{ width: "80%" }} alt="Door Icon" />
