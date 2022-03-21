@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
 import KiwiTalkieLogo from "components/KiwiTalkieLogo";
-import door from "assets/door.svg";
 import { useNavigate } from "react-router-dom";
 import UserContext from "contexts/UserContext";
 
@@ -49,7 +48,10 @@ const LogoContainer = styled.div`
 `;
 
 const SubmitButton = styled.button`
-  width: 50px;
+  color: white;
+  padding: 10px;
+  text-align: center;
+  font-weight: bold;
   height: 50px;
   border: none;
   margin-top: 15px;
@@ -96,7 +98,7 @@ const Login = ({ socket }) => {
           }}
         />
         <SubmitButton onClick={() => handleSubmit(username)}>
-          <img src={door} style={{ width: "80%" }} alt="Door Icon" />
+          Login
         </SubmitButton>
       </LoginModal>
     </Page>
