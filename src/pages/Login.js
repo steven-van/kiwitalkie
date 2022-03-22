@@ -3,7 +3,6 @@ import styled from "styled-components";
 import KiwiTalkieLogo from "components/KiwiTalkieLogo";
 import { useNavigate } from "react-router-dom";
 import UserContext from "contexts/UserContext";
-import { bake_cookie } from "sfcookies";
 
 const Page = styled.div`
   display: flex;
@@ -74,7 +73,6 @@ const Login = ({ socket }) => {
     if (user.trim() !== "") {
       setUsername(user);
       socket.emit("add-user", user);
-      bake_cookie("user", user);
       navigate("/chatroom");
     }
   };

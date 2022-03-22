@@ -8,7 +8,6 @@ import MessageList from "components/MessageList";
 import InputRoom from "components/InputRoom";
 import "react-toastify/dist/ReactToastify.css";
 import UserContext from "contexts/UserContext";
-import { delete_cookie } from "sfcookies";
 
 const Page = styled.div`
   display: flex;
@@ -102,7 +101,7 @@ const Chatroom = ({ socket }) => {
 
   const handleLogout = () => {
     socket.emit("remove-user");
-    delete_cookie("user");
+
     setUsername("");
   };
 

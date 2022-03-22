@@ -9,14 +9,11 @@ import Chatroom from "pages/Chatroom";
 import Login from "pages/Login";
 import io from "socket.io-client";
 import UserContext from "contexts/UserContext";
-import { read_cookie } from "sfcookies";
 
 const socket = io.connect("http://localhost:1337");
 
 const App = () => {
-  const [username, setUsername] = useState(
-    read_cookie("user").length === 0 ? "" : read_cookie("user")
-  );
+  const [username, setUsername] = useState("");
   return (
     <>
       <Router>
