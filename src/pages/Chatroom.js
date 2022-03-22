@@ -1,12 +1,14 @@
 import React, { useState, useEffect, useContext } from "react";
 import Header from "components/Header";
 import styled from "styled-components";
+import door from "assets/door.svg";
 import InputChat from "components/InputChat";
 import { ToastContainer, toast } from "react-toastify";
 import MessageList from "components/MessageList";
 import InputRoom from "components/InputRoom";
 import "react-toastify/dist/ReactToastify.css";
 import UserContext from "contexts/UserContext";
+import { delete_cookie } from "sfcookies";
 
 const Page = styled.div`
   display: flex;
@@ -28,9 +30,26 @@ const Sidebar = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  align-items: center;
   background-color: #1d2437;
   @media (max-width: 768px) {
     width: 30%;
+  }
+`;
+
+const LogoutButton = styled.button`
+  display: flex;
+  padding: 10px;
+  color: white;
+  align-items: center;
+  font-weight: bold;
+  border: none;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  background-color: #32de84;
+
+  &:hover {
+    cursor: pointer;
   }
 `;
 
@@ -42,7 +61,7 @@ const UsernameContainer = styled.p`
 
 const Chatroom = ({ socket }) => {
   const [messageList, setMessageList] = useState([]);
-  const { username } = useContext(UserContext);
+  const { username, setUsername } = useContext(UserContext);
   const [room, setRoom] = useState("");
 
   const handleJoinRoom = (newRoom) => {
@@ -81,6 +100,12 @@ const Chatroom = ({ socket }) => {
     }
   };
 
+  const handleLogout = () => {
+    socket.emit("remove-user");
+    delete_cookie("user");
+    setUsername("");
+  };
+
   useEffect(() => {
     socket.on("receive-message", (msg) => {
       setMessageList([
@@ -98,7 +123,15 @@ const Chatroom = ({ socket }) => {
     <Page>
       <Sidebar>
         <InputRoom handleJoinRoom={handleJoinRoom} />
-        <UsernameContainer>Hello {username}</UsernameContainer>
+        <div>
+          <UsernameContainer>
+            Hello <span style={{ fontWeight: "bold" }}>{username}</span>
+          </UsernameContainer>
+          <LogoutButton onClick={() => handleLogout()}>
+            <img src={door} style={{ width: "25px" }} alt="Door Icon" />
+            Logout
+          </LogoutButton>
+        </div>
       </Sidebar>
       <ChatSection>
         <Header />

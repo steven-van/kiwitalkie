@@ -1,8 +1,9 @@
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
 import styled from "styled-components";
 import KiwiTalkieLogo from "components/KiwiTalkieLogo";
 import { useNavigate } from "react-router-dom";
 import UserContext from "contexts/UserContext";
+import { bake_cookie } from "sfcookies";
 
 const Page = styled.div`
   display: flex;
@@ -65,12 +66,15 @@ const SubmitButton = styled.button`
 `;
 
 const Login = ({ socket }) => {
-  const { username, setUsername } = useContext(UserContext);
+  const [loginInput, setLoginInput] = useState("");
+  const { setUsername } = useContext(UserContext);
   const navigate = useNavigate();
 
-  const handleSubmit = (user) => {
+  const handleLogin = (user) => {
     if (user.trim() !== "") {
+      setUsername(user);
       socket.emit("add-user", user);
+      bake_cookie("user", user);
       navigate("/chatroom");
     }
   };
@@ -90,14 +94,18 @@ const Login = ({ socket }) => {
               e.preventDefault();
             }
             if (e.key === "Enter") {
-              handleSubmit(username);
+              handleLogin(loginInput);
             }
           }}
           onChange={(e) => {
-            setUsername(e.target.value);
+            setLoginInput(e.target.value);
           }}
         />
-        <SubmitButton onClick={() => handleSubmit(username)}>
+        <SubmitButton
+          onClick={() => {
+            handleLogin(loginInput);
+          }}
+        >
           Login
         </SubmitButton>
       </LoginModal>
