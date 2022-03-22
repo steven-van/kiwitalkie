@@ -13,8 +13,23 @@ const io = new Server(httpServer, {
 var username = {};
 
 io.on("connection", (socket) => {
+  socket.on("disconnect", () => {
+    delete username[socket.id];
+    console.log(username);
+  });
+
   socket.on("add-user", (user) => {
     username[socket.id] = user;
+    console.log(`Logged in as ${username[socket.id]}`);
+    console.log(username);
+  });
+
+  socket.on("remove-user", () => {
+    console.log(`Logging out : ${username[socket.id]}`);
+    delete username[socket.id];
+    username[socket.id] == undefined
+      ? console.log(`${username[socket.id]} Logged out`)
+      : console.log("Error while logging out");
   });
   socket.on("send-message", (message, room) => {
     const date = new Date();
@@ -35,7 +50,7 @@ io.on("connection", (socket) => {
       socket.leave(previousRoom);
     }
     socket.join(newRoom);
-    console.log(`Joined room ${newRoom}`);
+    console.log(`${username[socket.id]} joined room ${newRoom}`);
   });
 });
 
