@@ -38,9 +38,12 @@ const Sidebar = styled.div`
 
 const LogoutButton = styled.button`
   display: flex;
+  justify-content: center;
+  width: 100px;
   padding: 10px;
   color: white;
   align-items: center;
+  margin: auto;
   font-weight: bold;
   border: none;
   border-radius: 10px;
@@ -55,6 +58,7 @@ const LogoutButton = styled.button`
 const UsernameContainer = styled.p`
   color: #373e53;
   text-align: center;
+  margin-bottom: 10px;
   font-weight: 500;
 `;
 
