@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
 import Message from "components/Message";
 
@@ -21,10 +21,17 @@ const RoomContainer = styled.div`
 `;
 
 const MessageList = ({ messages, room }) => {
+  const endRef = useRef(null);
+
+  useEffect(() => {
+    endRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
+
   const renderChat = () => {
     const renderedMessages = messages.map((message, index) => {
       return (
         <Message
+          ref={endRef}
           key={index}
           username={message.username}
           timestamp={message.timestamp}
@@ -38,7 +45,11 @@ const MessageList = ({ messages, room }) => {
 
   return (
     <MessageListContainer>
-      {room && <RoomContainer>{`Room #${room}`}</RoomContainer>}
+      {room && (
+        <RoomContainer>
+          <span style={{ position: "fixed" }}>{`Room #${room}`}</span>
+        </RoomContainer>
+      )}
       {renderChat()}
     </MessageListContainer>
   );
