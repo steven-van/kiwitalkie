@@ -11,15 +11,6 @@ const MessageListContainer = styled.div`
   flex: 1;
   overflow-y: auto;
 `;
-
-const RoomContainer = styled.div`
-  position: absolute;
-  left: 50%;
-  top: 10px;
-  color: #373e53;
-  font-weight: bold;
-`;
-
 const MessageList = ({ messages, room }) => {
   const endRef = useRef(null);
 
@@ -43,16 +34,7 @@ const MessageList = ({ messages, room }) => {
     return renderedMessages;
   };
 
-  return (
-    <MessageListContainer>
-      {room && (
-        <RoomContainer>
-          <span style={{ position: "fixed" }}>{`Room #${room}`}</span>
-        </RoomContainer>
-      )}
-      {renderChat()}
-    </MessageListContainer>
-  );
+  return <MessageListContainer>{renderChat()}</MessageListContainer>;
 };
 
 export default MessageList;

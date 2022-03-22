@@ -137,8 +137,8 @@ const Chatroom = ({ socket }) => {
         </div>
       </Sidebar>
       <ChatSection>
-        <Header />
-        <MessageList room={room} messages={messageList} />
+        <Header room={room} />
+        <MessageList messages={messageList} />
         <InputChat handleMessageSubmit={handleMessageSubmit} />
       </ChatSection>
       <ToastContainer
