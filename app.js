@@ -10,25 +10,27 @@ const io = new Server(httpServer, {
   },
 });
 
-var username = {};
+var usernames = {};
 
 io.on("connection", (socket) => {
   socket.on("disconnect", () => {
-    delete username[socket.id];
-    console.log(username);
+    console.log(`${usernames[socket.id]} logged out`);
+    delete usernames[socket.id];
+    console.log(usernames);
   });
 
   socket.on("add-user", (user) => {
-    username[socket.id] = user;
-    console.log(`Logged in as ${username[socket.id]}`);
-    console.log(username);
+    usernames[socket.id] = user;
+    console.log(`Logged in as ${usernames[socket.id]}`);
+    console.log(usernames);
   });
 
   socket.on("remove-user", () => {
-    console.log(`Logging out : ${username[socket.id]}`);
-    delete username[socket.id];
-    username[socket.id] == undefined
-      ? console.log(`${username[socket.id]} Logged out`)
+    temp = usernames[socket.id];
+    console.log(`Logging out : ${usernames[socket.id]}`);
+    delete usernames[socket.id];
+    usernames[socket.id] == undefined
+      ? console.log(`${temp} logged out`)
       : console.log("Error while logging out");
   });
   socket.on("send-message", (message, room) => {
@@ -38,7 +40,7 @@ io.on("connection", (socket) => {
       ":" +
       date.getMinutes().toString().padStart(2, "0");
     message.timestamp = time;
-    message.username = username[socket.id];
+    message.username = usernames[socket.id];
     if (room === "") {
       socket.broadcast.emit("receive-message", message);
     } else {
@@ -50,7 +52,7 @@ io.on("connection", (socket) => {
       socket.leave(previousRoom);
     }
     socket.join(newRoom);
-    console.log(`${username[socket.id]} joined room ${newRoom}`);
+    console.log(`${usernames[socket.id]} joined room ${newRoom}`);
   });
 });
 
