@@ -68,7 +68,7 @@ const Chatroom = ({ socket }) => {
   const [room, setRoom] = useState("");
 
   const handleJoinRoom = (newRoom) => {
-    if (newRoom !== room) {
+    if (newRoom !== room && newRoom !== "") {
       socket.emit("join-room", newRoom, room);
       toast.info(`Joined room #${newRoom}`, {
         theme: "colored",

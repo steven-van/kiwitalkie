@@ -4,10 +4,8 @@ import styled from "styled-components";
 const Container = styled.div`
   align-self: ${(props) => (props.fromMe ? "flex-end" : "flex-start")};
   max-width: 40%;
-  }
 `;
 const MessageContainer = styled.div`
-  display: inline-block;
   padding: 12px;
   word-break: break-word;
   font-weight: 500;
@@ -21,6 +19,7 @@ const MessageContainer = styled.div`
   }
 `;
 const Div = styled.div`
+  text-align: ${(props) => props.textAlign || "start"};
   color: #373e53;
 `;
 
@@ -29,8 +28,10 @@ const Message = React.forwardRef(
     return (
       <Container ref={endRef} fromMe={!username}>
         {username && <Div>{username}</Div>}
-        <MessageContainer fromMe={!username}>{children}</MessageContainer>
-        <Div>{timestamp}</Div>
+        <div style={{ display: "inline-block" }}>
+          <MessageContainer fromMe={!username}>{children}</MessageContainer>
+          <Div textAlign={"end"}>{timestamp}</Div>
+        </div>
       </Container>
     );
   }
